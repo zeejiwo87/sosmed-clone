@@ -14,3 +14,5 @@ tsconfig.tsbuildinfo
 
 # executable lokal
 *.exe
+# local sqlite db
+*.db
