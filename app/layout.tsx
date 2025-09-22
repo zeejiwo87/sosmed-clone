@@ -7,6 +7,7 @@ import "react-international-phone/style.css";
 import Providers from "./providers";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import WhatsAppFAB from "../components/WhatsAppFAB"; // ← Tambahkan ini
 
 const inter = Inter({ variable: "--font-sans", subsets: ["latin"] });
 
@@ -25,9 +26,6 @@ export const metadata: Metadata = {
     "Kami menyediakan berbagai layanan sosial media dengan harga termurah, kualitas terjamin, dan proses cepat untuk membantu akunmu berkembang.",
   applicationName: "SOCIOSTORE",
   manifest: "/manifest.webmanifest",
-
-  // JANGAN taruh themeColor di sini lagi
-
   openGraph: {
     type: "website",
     siteName: "SOCIOSTORE",
@@ -40,7 +38,6 @@ export const metadata: Metadata = {
       { url: OG_LOGO, secureUrl: OG_LOGO, width: 512, height: 512, alt: "SOCIOSTORE Logo" },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
     title: "SOCIOSTORE — Layanan Sosial Media Termurah",
@@ -48,16 +45,13 @@ export const metadata: Metadata = {
       "Kami menyediakan berbagai layanan sosial media dengan harga termurah, kualitas terjamin, dan proses cepat untuk membantu akunmu berkembang.",
     images: [OG_BANNER],
   },
-
   alternates: { canonical: SITE_URL },
   robots: { index: true, follow: true },
-
   icons: {
     icon: "/favicon.ico",
     apple: "/images/sociostore.png",
     shortcut: ["/icons/icon-192.png"],
   },
-
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -65,7 +59,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Pindahkan themeColor ke viewport (boleh string atau array dengan media query)
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -86,6 +79,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
           <Footer />
+
+          {/* Floating WhatsApp tampil di SEMUA halaman */}
+          <WhatsAppFAB
+            contacts={[
+              { label: "Admin 1", phone: "+62 851 7977 8353" },
+              { label: "Admin 2", phone: "+62 858 7684 6768" },
+            ]}
+            preset="Halo, saya butuh bantuan."
+          />
         </Providers>
       </body>
     </html>
