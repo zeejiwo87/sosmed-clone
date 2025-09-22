@@ -1,5 +1,8 @@
 // app/api/auth/[...nextauth]/route.ts
-import NextAuth, { type NextAuthOptions,} from "next-auth";
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+import NextAuth, { type NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import { prisma } from "@/lib/prisma";
@@ -31,6 +34,7 @@ if (!process.env.NEXTAUTH_SECRET) {
 }
 
 export const authOptions: NextAuthOptions = {
+  // v4 tidak punya trustHost. Pastikan NEXTAUTH_URL diset di env.
   secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: "jwt" },
   pages: { signIn: "/login" },
@@ -100,12 +104,12 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       const t = token as TokenShape;
 
-      // default dari token
+      // nilai awal dari token
       let freshName = t.name ?? null;
       let freshImage = t.image ?? null;
       let freshPhone = t.phone ?? null;
 
-      // ambil data terbaru dari DB jika ada id — tapi jangan pernah lempar error
+      // refresh data dari DB kalau ada id—tapi jangan lempar error
       if (t.id) {
         try {
           const fresh = await prisma.user.findUnique({
@@ -122,7 +126,7 @@ export const authOptions: NextAuthOptions = {
         }
       }
 
-      // karena kamu sudah extend tipe Session, set field langsung
+      // jika tipe Session kamu di-extend, set field di sini
       session.user = {
         ...(session.user || {}),
         id: (t.id as string) ?? "",
@@ -134,8 +138,10 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
+
+  // lebih verbose saat dev
+  debug: process.env.NODE_ENV !== "production",
 };
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
-export const dynamic = "force-dynamic";

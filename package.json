@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "postinstall": "echo [postinstall] prisma generate && prisma generate",
+    "prebuild": "echo [prebuild] prisma generate && prisma generate",
+    "build": "echo [build] start && next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.9",
-    "@prisma/client": "^6.14.0",
+    "@prisma/client": "6.14.0",
     "axios": "^1.11.0",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
@@ -38,7 +40,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
-    "prisma": "^6.14.0",
+    "prisma": "6.14.0",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
