@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "postinstall": "echo [postinstall] prisma generate && prisma generate",
-    "prebuild": "echo [prebuild] prisma generate && prisma generate",
-    "build": "echo [build] start && next build",
+    "postinstall": "prisma generate",
+    "prebuild": "prisma generate",
+    "build": "prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint"
   },
