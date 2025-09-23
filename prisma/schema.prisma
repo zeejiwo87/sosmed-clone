@@ -1,12 +1,11 @@
 // prisma/schema.prisma
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL") // contoh: file:./dev.db
+  provider = "postgresql"
+  url      = env("DATABASE_URL")  // <- HANYA nama variabel env
 }
 
 model User {
@@ -15,12 +14,11 @@ model User {
   passwordHash String
   name         String?
   avatarUrl    String?
-
-  // --- Wallet ---
   saldo        Int      @default(0)
-
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  @@index([phone])
 }
 
 model Otp {
