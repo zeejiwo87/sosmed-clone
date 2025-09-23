@@ -12,7 +12,7 @@ import WhatsAppFAB from "../components/WhatsAppFAB"; // ← Tambahkan ini
 const inter = Inter({ variable: "--font-sans", subsets: ["latin"] });
 
 // Ganti ke domain kamu
-const SITE_URL = "https://94ec61b5e2ec.ngrok-free.app";
+const SITE_URL = "https://zeejiwo.my.id/";
 const OG_BANNER = `${SITE_URL}/images/banner.png`;
 const OG_LOGO   = `${SITE_URL}/images/sociostore.png`;
 
