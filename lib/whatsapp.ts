@@ -13,7 +13,7 @@ export const sendMessage = async ({
 }) => {
   try {
     console.log("sendWa", text, type, number, imageUrl);
-    const res = await fetch("http://167.179.104.236:64646/notify", {
+    const res = await fetch("/notify", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,6 +29,6 @@ export const sendMessage = async ({
     const responseText = await res.text();
     console.log("Response:", responseText);
   } catch (error) {
-    console.error("Error sending message:", error);
-  }
+    console.error("Error sending message:", error);
+  }
 };
